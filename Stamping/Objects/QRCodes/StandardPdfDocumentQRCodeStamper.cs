@@ -2,21 +2,22 @@
 using System.Drawing.Imaging;
 using System.IO;
 using PdfDocumentStamperInterfaces;
-using PdfDocumentStampingConsoleApp.QRCodes.Generating;
-using QRCoder;
-using QRCoderQRCodeGenerator = QRCoder.QRCodeGenerator;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Images;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
+using IQRCodeGenerator = PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating.IQRCodeGenerator;
 
-namespace PdfDocumentStampingConsoleApp.QRCodes.Stamping
+namespace PdfDocumentStampingConsoleApp.Stamping.QRCodes
 {
     internal class StandardPdfDocumentQRCodeStamper : IPdfDocumentQRCodeStamper
     {
-        public StandardPdfDocumentQRCodeStamper(IQRCodeGenerator qrCodeGenerator, IPdfDocumentStamper pdfDocumentStamper)
+        public StandardPdfDocumentQRCodeStamper(IQRCodeGenerator qrCodeGenerator, IPdfDocumentImageStamper pdfDocumentImageStamper)
         {
-            PdfDocumentStamper = pdfDocumentStamper;
+            PdfDocumentImageStamper = pdfDocumentImageStamper;
             QRCodeGenerator = qrCodeGenerator;
         }
 
-        public IPdfDocumentStamper PdfDocumentStamper { get; set; }
+        public IPdfDocumentImageStamper PdfDocumentImageStamper { get; set; }
+
         public IQRCodeGenerator QRCodeGenerator { get; set; }
 
         public void StampQRCodeInPdfDocument(string sourceFilePath, string textToEncode, string destFilePath,
@@ -31,14 +32,7 @@ namespace PdfDocumentStampingConsoleApp.QRCodes.Stamping
 
         private void StampPdfDocument(string sourcePdfDocumentPath, Image qrCodeImage, string outputPdfDocumentPath, IPdfDocumentStamper.StampingOptions options)
         {
-            using (var qrCodeStream = new MemoryStream())
-            {
-                qrCodeImage.Save(qrCodeStream, ImageFormat.Png);
-
-                qrCodeStream.Seek(0, SeekOrigin.Begin);
-
-                PdfDocumentStamper.StampPdfDocument(sourcePdfDocumentPath, qrCodeStream, outputPdfDocumentPath, options);
-            }
+            PdfDocumentImageStamper.StampImageInPdfDocument(sourcePdfDocumentPath, qrCodeImage, outputPdfDocumentPath, options);
         }
     }
 }

@@ -10,9 +10,12 @@ namespace PdfDocumentStampingConsoleApp
                 .Builder
                 .WithConsoleErrorHandling()
                 .WithCommandLineArgsStampingOptions(args)
-                .WithStandardPdfDocumentQRCodeStamper()
+                .WithStandardStampers()
+                .WithStandardStampingCommandSource()
                 .Build()
                     .Run();
+
+            Console.ReadKey();
         }
     }
 }

@@ -68,65 +68,62 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=6.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.6.5.0\lib\netstandard2.0\Autofac.dll</HintPath>
+      <HintPath>packages\Autofac.6.5.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Extras.DynamicProxy, Version=7.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Extras.DynamicProxy.7.0.0\lib\netstandard2.0\Autofac.Extras.DynamicProxy.dll</HintPath>
+      <HintPath>packages\Autofac.Extras.DynamicProxy.7.0.0\lib\netstandard2.0\Autofac.Extras.DynamicProxy.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.5.1.1\lib\net462\Castle.Core.dll</HintPath>
+      <HintPath>packages\Castle.Core.5.1.1\lib\net462\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine, Version=2.9.1.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.2.9.1\lib\net461\CommandLine.dll</HintPath>
+      <HintPath>packages\CommandLineParser.2.9.1\lib\net461\CommandLine.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="PdfDocumentStamperInterfaces">
-      <HintPath>..\..\PdfDocumentStamperInterfaces\PdfDocumentStamperInterfaces\bin\Debug\netstandard2.0\PdfDocumentStamperInterfaces.dll</HintPath>
+    <Reference Include="PdfDocumentStamperInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PdfDocumentStamperInterfaces.1.0.0\lib\netstandard2.0\PdfDocumentStamperInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="PDFsharp, Version=1.51.5185.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFSharp.NetStandard2.1.51.5185.1\lib\netstandard2.0\PDFsharp.dll</HintPath>
+      <HintPath>packages\PDFSharp.NetStandard2.1.51.5185.1\lib\netstandard2.0\PDFsharp.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharpPdfDocumentStamper">
-      <HintPath>..\..\PdfSharpPdfDocumentStamper\PdfSharpPdfDocumentStamper\bin\Debug\netstandard2.0\PdfSharpPdfDocumentStamper.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp, Version=2023.0.6.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Redist.2023.0.6\lib\net45\PostSharp.dll</HintPath>
+    <Reference Include="PdfSharpPdfDocumentStamper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PdfSharpPdfDocumentStamper.1.0.0\lib\netstandard2.0\PdfSharpPdfDocumentStamper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
-      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+      <HintPath>packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+      <HintPath>packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Resources.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Resources.Extensions.6.0.0\lib\net461\System.Resources.Extensions.dll</HintPath>
+    <Reference Include="System.Resources.Extensions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Resources.Extensions.7.0.0\lib\net462\System.Resources.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -138,19 +135,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandling\ApplicationErrorHandler.cs" />
+    <Compile Include="InputSources\Console\ImageStampingConsoleOptions.cs" />
+    <Compile Include="InputSources\Console\QRCodeStampingConsoleOptions.cs" />
+    <Compile Include="InputSources\ImageStampingOptions.cs" />
+    <Compile Include="InputSources\QRCodeStampingOptions.cs" />
+    <Compile Include="Stamping\Commands\InOutStampingCommandException.cs" />
+    <Compile Include="Stamping\Commands\Sources\IStampingCommandInputSource.cs" />
+    <Compile Include="Stamping\Commands\Sources\IStampingCommandOutputSource.cs" />
     <Compile Include="PdfDocumentStampingAppBuilder.cs" />
     <Compile Include="InputSources\IPdfDocumentStampingOptionsInputSource.cs" />
-    <Compile Include="InputSources\PdfDocumentStampingOptionsCommandLineArgs.cs" />
+    <Compile Include="InputSources\Console\PdfDocumentStampingOptionsCommandLineArgs.cs" />
     <Compile Include="PdfDocumentStampingApp.cs" />
-    <Compile Include="PdfDocumentStampingConsoleOptions.cs" />
-    <Compile Include="PdfDocumentStampingOptions.cs" />
+    <Compile Include="InputSources\Console\PdfDocumentStampingConsoleOptions.cs" />
+    <Compile Include="InputSources\PdfDocumentStampingOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QRCodes\Generating\IQRCodeGenerator.cs" />
-    <Compile Include="QRCodes\Generating\GeneratingOptions.cs" />
-    <Compile Include="QRCodes\Generating\StandardQRCodeGenerator.cs" />
-    <Compile Include="QRCodes\Stamping\IPdfDocumentQRCodeStamper.cs" />
-    <Compile Include="QRCodes\Stamping\StandardPdfDocumentQRCodeStamper.cs" />
+    <Compile Include="Stamping\Commands\InOutStampingCommand.cs" />
+    <Compile Include="Stamping\Commands\IStampingCommand.cs" />
+    <Compile Include="Stamping\Commands\Sources\IStampingCommandSource.cs" />
+    <Compile Include="Stamping\Commands\Sources\NoOpStampingCommandOutputSource.cs" />
+    <Compile Include="Stamping\Commands\Sources\StampingCommandFactories.cs" />
+    <Compile Include="Stamping\Commands\Sources\StandardStampingCommandInputSource.cs" />
+    <Compile Include="Stamping\Commands\Sources\StandardStampingCommandSource.cs" />
+    <Compile Include="Stamping\Objects\Images\ImageStampingCommand.cs" />
+    <Compile Include="Stamping\Objects\Images\ImageStampingCommandInput.cs" />
+    <Compile Include="Stamping\Objects\Images\PdfDocumentImageStamper.cs" />
+    <Compile Include="Stamping\Objects\Images\StandardPdfDocumentImageStamper.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\Generating\GeneratingOptions.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\Generating\IQRCodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\Generating\StandardQRCodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\IPdfDocumentQRCodeStamper.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\QRCodeStampingCommand.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\QRCodeStampingCommandInput.cs" />
+    <Compile Include="Stamping\Objects\QRCodes\StandardPdfDocumentQRCodeStamper.cs" />
+    <Compile Include="Stamping\Commands\StampingCommandInput.cs" />
+    <Compile Include="Stamping\Commands\StampingCommandOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

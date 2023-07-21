@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
+using System.Security.Policy;
 
-namespace PdfDocumentStampingConsoleApp.QRCodes.Generating
+namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating
 {
     partial interface IQRCodeGenerator
     {
@@ -11,12 +12,14 @@ namespace PdfDocumentStampingConsoleApp.QRCodes.Generating
             private Color lightColor;
             private Color darkColor;
             private int pixelsInModule;
+            private bool drawQuietZone;
 
             public GeneratingOptions()
             {
                 DarkColor = default(Color);
                 LightColor = default(Color);
                 PixelsInModule = default(int);
+                DrawQuietZone = default(bool);
             }
 
             public Color DarkColor
@@ -35,6 +38,12 @@ namespace PdfDocumentStampingConsoleApp.QRCodes.Generating
             {
                 get => pixelsInModule;
                 set => pixelsInModule = ResolvePixelsInModule(value, DefaultPixelsInModule);
+            }
+
+            public bool DrawQuietZone
+            {
+                get => drawQuietZone;
+                set => drawQuietZone = value;
             }
 
             private Color ResolveColor(Color targetColor, Color defaultColor) => targetColor == default(Color) ? defaultColor : targetColor;

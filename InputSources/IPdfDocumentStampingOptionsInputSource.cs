@@ -1,7 +1,8 @@
-﻿namespace PdfDocumentStampingConsoleApp.InputSources
+﻿using System.Collections.Generic;
+
+namespace PdfDocumentStampingConsoleApp.InputSources
 {
-    interface IPdfDocumentStampingOptionsInputSource
+    interface IPdfDocumentStampingOptionsInputSource : IEnumerable<PdfDocumentStampingOptions>
     {
-        PdfDocumentStampingOptions GetPdfDocumentStampingOptions();
     }
 }

@@ -1,11 +1,13 @@
 ﻿using PdfDocumentStamperInterfaces;
-using PdfDocumentStampingConsoleApp.QRCodes.Generating;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Images;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating;
 
-namespace PdfDocumentStampingConsoleApp.QRCodes.Stamping
+namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes
 {
     partial interface IPdfDocumentQRCodeStamper
     {
-        IPdfDocumentStamper PdfDocumentStamper { get; set; }
+        IPdfDocumentImageStamper PdfDocumentImageStamper { get; set; }
+
         IQRCodeGenerator QRCodeGenerator { get; set; }
 
         void StampQRCodeInPdfDocument(string sourceFilePath, string textToEncode, string destFilePath, IPdfDocumentStamper.StampingOptions stampingOptions = null);

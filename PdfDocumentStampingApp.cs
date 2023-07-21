@@ -1,40 +1,26 @@
-﻿using PdfDocumentStamperInterfaces;
+﻿using System;
+using Castle.DynamicProxy;
+using PdfDocumentStamperInterfaces;
 using PdfDocumentStampingConsoleApp.InputSources;
-using PdfDocumentStampingConsoleApp.QRCodes.Generating;
-using PdfDocumentStampingConsoleApp.QRCodes.Stamping;
+using PdfDocumentStampingConsoleApp.Stamping.Commands.Sources;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
+using PdfDocumentStampingConsoleApp.Stamping.QRCodes;
 
 namespace PdfDocumentStampingConsoleApp
 {
-    internal partial class PdfDocumentStampingApp 
+    partial class PdfDocumentStampingApp
     {
-        private readonly IPdfDocumentStampingOptionsInputSource optionsInputSource;
-        private readonly IPdfDocumentQRCodeStamper pdfDocumentQRCodeStamper;
+        private readonly IStampingCommandSource stampingCommandSource;
 
-        public PdfDocumentStampingApp(
-            IPdfDocumentStampingOptionsInputSource optionsInputSource, 
-            IPdfDocumentQRCodeStamper pdfDocumentQRCodeStamper)
+        public PdfDocumentStampingApp(IStampingCommandSource stampingCommandSource)
         {
-            this.optionsInputSource = optionsInputSource;
-            this.pdfDocumentQRCodeStamper = pdfDocumentQRCodeStamper;
+            this.stampingCommandSource = stampingCommandSource;
         }
 
         public virtual void Run()
         {
-            var stampingOptions = GetPdfDocumentStampingOptions();
-
-            DoStampingByOptions(stampingOptions);
-        }
-
-        private PdfDocumentStampingOptions GetPdfDocumentStampingOptions() => optionsInputSource.GetPdfDocumentStampingOptions();
-
-        private void DoStampingByOptions(PdfDocumentStampingOptions options)
-        {
-            pdfDocumentQRCodeStamper.QRCodeGenerator.Options.DarkColor = options.QRCodeDarkColor;
-            pdfDocumentQRCodeStamper.QRCodeGenerator.Options.LightColor = options.QRCodeLightColor;
-
-            pdfDocumentQRCodeStamper.StampQRCodeInPdfDocument(
-                options.SourcePdfDocumentPath, options.TextToEncode, options.OutputPdfDocumentPath,
-                IPdfDocumentStamper.StampingOptions.DefaultWithStampingPositions(options.StampPositions));
+            foreach (var stampingCommand in stampingCommandSource)
+                stampingCommand.Run();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace PdfDocumentStampingConsoleApp.QRCodes.Generating
+namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating
 {
     partial interface IQRCodeGenerator
     {

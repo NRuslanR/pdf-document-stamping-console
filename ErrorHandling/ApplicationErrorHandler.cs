@@ -4,7 +4,7 @@ using Castle.DynamicProxy;
 
 namespace PdfDocumentStampingConsoleApp.ErrorHandling
 {
-    internal class ApplicationErrorHandler: IInterceptor
+    class ApplicationErrorHandler: IInterceptor
     {
         private readonly TextWriter errorWriter;
 
