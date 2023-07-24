@@ -14,8 +14,6 @@ namespace PdfDocumentStampingConsoleApp
                 .WithStandardStampingCommandSource()
                 .Build()
                     .Run();
-
-            Console.ReadKey();
         }
     }
 }
