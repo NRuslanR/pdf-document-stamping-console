@@ -82,14 +82,8 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="PdfDocumentStamperInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\PdfDocumentStamperInterfaces.1.0.0\lib\netstandard2.0\PdfDocumentStamperInterfaces.dll</HintPath>
-    </Reference>
     <Reference Include="PDFsharp, Version=1.51.5185.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>packages\PDFSharp.NetStandard2.1.51.5185.1\lib\netstandard2.0\PDFsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharpPdfDocumentStamper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\PdfSharpPdfDocumentStamper.1.0.0\lib\netstandard2.0\PdfSharpPdfDocumentStamper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -132,9 +126,18 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net48\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net48\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandling\ApplicationErrorHandler.cs" />
+    <Compile Include="InputSources\BarcodeStampingOptions.cs" />
+    <Compile Include="InputSources\LinearBarcodeStampingOptions.cs" />
+    <Compile Include="InputSources\Console\BarcodeStampingConsoleOptions.cs" />
     <Compile Include="InputSources\Console\ImageStampingConsoleOptions.cs" />
     <Compile Include="InputSources\Console\QRCodeStampingConsoleOptions.cs" />
     <Compile Include="InputSources\ImageStampingOptions.cs" />
@@ -157,17 +160,29 @@
     <Compile Include="Stamping\Commands\Sources\StampingCommandFactories.cs" />
     <Compile Include="Stamping\Commands\Sources\StandardStampingCommandInputSource.cs" />
     <Compile Include="Stamping\Commands\Sources\StandardStampingCommandSource.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\LinearBarcodeStampingCommand.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\LinearBarcodeStampingCommandInput.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\Generating\GeneratingOptions.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\Generating\ILinearBarcodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\Generating\StandardLinearBarcodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\StandardPdfDocumentLinearBarcodeStamper.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\1D\IPdfDocumentLinearBarcodeStamper.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\BarcodeStampingCommand.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\BarcodeStampingCommandInput.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\Generating\IBarcodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\IPdfDocumentBarcodeStamper.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\StandardPdfDocumentBarcodeStamper.cs" />
     <Compile Include="Stamping\Objects\Images\ImageStampingCommand.cs" />
     <Compile Include="Stamping\Objects\Images\ImageStampingCommandInput.cs" />
     <Compile Include="Stamping\Objects\Images\PdfDocumentImageStamper.cs" />
     <Compile Include="Stamping\Objects\Images\StandardPdfDocumentImageStamper.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\Generating\GeneratingOptions.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\Generating\IQRCodeGenerator.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\Generating\StandardQRCodeGenerator.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\IPdfDocumentQRCodeStamper.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\QRCodeStampingCommand.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\QRCodeStampingCommandInput.cs" />
-    <Compile Include="Stamping\Objects\QRCodes\StandardPdfDocumentQRCodeStamper.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\Generating\GeneratingOptions.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\Generating\IQRCodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\Generating\StandardQRCodeGenerator.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\IPdfDocumentQRCodeStamper.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\QRCodeStampingCommand.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\QRCodeStampingCommandInput.cs" />
+    <Compile Include="Stamping\Objects\Barcodes\2D\QRCodes\StandardPdfDocumentQRCodeStamper.cs" />
     <Compile Include="Stamping\Commands\StampingCommandInput.cs" />
     <Compile Include="Stamping\Commands\StampingCommandOutput.cs" />
   </ItemGroup>
@@ -186,6 +201,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PdfDocumentStamperInterfaces\PdfDocumentStamperInterfaces\PdfDocumentStamperInterfaces.csproj">
+      <Project>{24717433-5c8c-4c06-a35d-c11b70309fd6}</Project>
+      <Name>PdfDocumentStamperInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfSharpPdfDocumentStamper\PdfSharpPdfDocumentStamper\PdfSharpPdfDocumentStamper.csproj">
+      <Project>{67f9b54f-90ef-4c08-b406-58c21d1bc239}</Project>
+      <Name>PdfSharpPdfDocumentStamper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

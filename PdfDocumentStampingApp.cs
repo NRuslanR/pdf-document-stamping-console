@@ -3,8 +3,6 @@ using Castle.DynamicProxy;
 using PdfDocumentStamperInterfaces;
 using PdfDocumentStampingConsoleApp.InputSources;
 using PdfDocumentStampingConsoleApp.Stamping.Commands.Sources;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
-using PdfDocumentStampingConsoleApp.Stamping.QRCodes;
 
 namespace PdfDocumentStampingConsoleApp
 {

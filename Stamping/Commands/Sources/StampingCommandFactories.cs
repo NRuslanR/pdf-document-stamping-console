@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using Autofac;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._1D;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes;
 using PdfDocumentStampingConsoleApp.Stamping.Objects.Images;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
 
 namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
 {
@@ -22,6 +25,9 @@ namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
 
             stampingCommandFactories[typeof(ImageStampingCommandInput)] =
                 new ImageStampingCommandFactory(stampingCommandOutputSource, objectRegistry);
+
+            stampingCommandFactories[typeof(LinearBarcodeStampingCommandInput)] =
+                new LinearBarcodeStampingCommandFactory(stampingCommandOutputSource, objectRegistry);
         }
 
         private StampingCommandFactory GetStampingCommandFactory(StampingCommandInput stampingCommandInput)
@@ -48,6 +54,20 @@ namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
             }
 
             public abstract IStampingCommand CreateStampingCommand(StampingCommandInput commandInput);
+        }
+
+        private class LinearBarcodeStampingCommandFactory : StampingCommandFactory
+        {
+            public LinearBarcodeStampingCommandFactory(IStampingCommandOutputSource commandOutputSource, ILifetimeScope objectRegistry) : base(commandOutputSource, objectRegistry)
+            {
+            }
+
+            public override IStampingCommand CreateStampingCommand(StampingCommandInput commandInput)
+            {
+                var pdfDocumentBarcodeStamper = ObjectRegistry.Resolve<IPdfDocumentLinearBarcodeStamper>();
+
+                return new LinearBarcodeStampingCommand(pdfDocumentBarcodeStamper, commandInput, CommandOutputSource);
+            }
         }
 
         private class QRCodeStampingCommandFactory : StampingCommandFactory

@@ -1,20 +1,20 @@
 ﻿using System.Drawing;
 using QRCoder;
 
-namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating
+namespace PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes.Generating
 {
-    class StandardQRCodeGenerator : Objects.QRCodes.Generating.IQRCodeGenerator
+    class StandardQRCodeGenerator : IQRCodeGenerator
     {
-        public StandardQRCodeGenerator() : this(new Objects.QRCodes.Generating.IQRCodeGenerator.GeneratingOptions())
+        public StandardQRCodeGenerator() : this(new IQRCodeGenerator.GeneratingOptions())
         {
         }
 
-        public StandardQRCodeGenerator(Objects.QRCodes.Generating.IQRCodeGenerator.GeneratingOptions options)
+        public StandardQRCodeGenerator(IQRCodeGenerator.GeneratingOptions options)
         {
-            this.Options = options;
+            Options = options;
         }
 
-        public Image GenerateQRCode(string plainText)
+        public Image GenerateBarcode(string plainText)
         {
             using (var qrCodeGenerator = new QRCodeGenerator())
             {
@@ -29,6 +29,6 @@ namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating
             }
         }
 
-        public Objects.QRCodes.Generating.IQRCodeGenerator.GeneratingOptions Options { get; set; }
+        public IQRCodeGenerator.GeneratingOptions Options { get; set; }
     }
 }

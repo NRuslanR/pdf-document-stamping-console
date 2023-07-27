@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Windows.Navigation;
 using CommandLine;
 using PdfDocumentStamperInterfaces;
 
@@ -31,7 +33,6 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
             var parsingResult = ParseCommandLineArgs(args);
 
             return ExtractPdfDocumentStampingOptions(parsingResult);
-            
         }
 
         private ParserResult<object> ParseCommandLineArgs(IEnumerable<string> args)
@@ -48,7 +49,7 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
 
         private Type[] GetAccessibleOptionTypes()
         {
-            return new Type[] { typeof(QRCodeStampingConsoleOptions), typeof(ImageStampingConsoleOptions) };
+            return new Type[] { typeof(BarcodeStampingConsoleOptions), typeof(QRCodeStampingConsoleOptions), typeof(ImageStampingConsoleOptions) };
         }
 
         private PdfDocumentStampingOptions ExtractPdfDocumentStampingOptions(ParserResult<object> parsingResult)
@@ -58,6 +59,9 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
 
         private PdfDocumentStampingOptions MapPdfDocumentStampingOptions(object consoleOptions)
         {
+            if (consoleOptions is BarcodeStampingConsoleOptions barcodeStampingConsoleOptions)
+                return MapBarcodeStampingOptions(barcodeStampingConsoleOptions);
+
             if (consoleOptions is QRCodeStampingConsoleOptions qrCodeStampingConsoleOptions)
                 return MapQRCodeStampingOptions(qrCodeStampingConsoleOptions);
 
@@ -65,6 +69,19 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
                 return MapImageStampingOptions(imageStampingConsoleOptions);
 
             throw new ArgumentException($"\"{consoleOptions.GetType().Name}\" is not accounted for the mapping of the pdf document stamping options");
+        }
+
+        private PdfDocumentStampingOptions MapBarcodeStampingOptions(BarcodeStampingConsoleOptions consoleOptions)
+        {
+            var options = new LinearBarcodeStampingOptions
+            {
+                WriteText = consoleOptions.WriteText,
+                TextToEncode = consoleOptions.TextToEncode
+            };
+
+            SetPdfDocumentStampingOptions(options, consoleOptions);
+
+            return options;
         }
 
         private QRCodeStampingOptions MapQRCodeStampingOptions(QRCodeStampingConsoleOptions consoleOptions)
@@ -98,12 +115,28 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
             PdfDocumentStampingOptions options,
             PdfDocumentStampingConsoleOptions consoleOptions)
         {
+            var measureUnit = ParseStampingMeasureUnit(consoleOptions.StandardStampPositionOffsetUnit);
+
             var standardPositionNumbers = ZipStandardPositionNumbers(consoleOptions.StandardStampPositionNumbers,
                 consoleOptions.StandardStampPositionNumber);
 
-            options.StampPositions = MapStampPositions(standardPositionNumbers);
+            var basePosition = new IPdfDocumentStamper.Position(consoleOptions.StandardStampPositionHorizontalOffset,
+                consoleOptions.StandardStampPositionVerticalOffset, measureUnit);
+
+            options.StampPositions = MapStandardStampPositions(standardPositionNumbers, basePosition);
             options.SourcePdfDocumentPath = consoleOptions.SourcePdfDocumentPath;
             options.OutputPdfDocumentPath = consoleOptions.OutputPdfDocumentPath;
+        }
+
+        private IPdfDocumentStamper.MeasureUnit ParseStampingMeasureUnit(string measureUnitString)
+        {
+            return
+                measureUnitString == "mm" ? IPdfDocumentStamper.MeasureUnit.Millimeter :
+                measureUnitString == "cm" ? IPdfDocumentStamper.MeasureUnit.Centimeter :
+
+                throw new ArgumentException(
+                    string.IsNullOrWhiteSpace(measureUnitString) ? "Measure unit is not specified" :
+                        $"{measureUnitString} is unknown measure unit");
         }
 
         private IEnumerable<int> ZipStandardPositionNumbers(IEnumerable<int> positionNumbers, int positionNumber)
@@ -124,14 +157,15 @@ namespace PdfDocumentStampingConsoleApp.InputSources.Console
             return new List<int> { 1 };
         }
 
-        private IEnumerable<IPdfDocumentStamper.Position> MapStampPositions(IEnumerable<int> positionNumbers)
+        private IEnumerable<IPdfDocumentStamper.Position> MapStandardStampPositions(IEnumerable<int> positionNumbers,
+            IPdfDocumentStamper.Position basePosition)
         {
             return positionNumbers.Distinct().Select(pn =>
 
-                pn == 1 ? IPdfDocumentStamper.Position.LeftTopCorner :
-                pn == 2 ? IPdfDocumentStamper.Position.RightTopCorner :
-                pn == 3 ? IPdfDocumentStamper.Position.RightBottomCorner :
-                pn == 4 ? IPdfDocumentStamper.Position.LeftBottomCorner :
+                pn == 1 ? IPdfDocumentStamper.Position.LeftTopCorner.FromBasePosition(basePosition):
+                pn == 2 ? IPdfDocumentStamper.Position.RightTopCorner.FromBasePosition(basePosition) :
+                pn == 3 ? IPdfDocumentStamper.Position.RightBottomCorner.FromBasePosition(basePosition) :
+                pn == 4 ? IPdfDocumentStamper.Position.LeftBottomCorner.FromBasePosition(basePosition) :
                 throw new ArgumentException("Incorrect QR-code's position number")
 
             ).ToList();

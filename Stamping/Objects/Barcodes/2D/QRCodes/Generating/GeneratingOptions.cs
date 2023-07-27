@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
-using System.Security.Policy;
 
-namespace PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating
+namespace PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes.Generating
 {
     partial interface IQRCodeGenerator
     {

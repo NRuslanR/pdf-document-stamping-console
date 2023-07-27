@@ -8,12 +8,15 @@ using PdfDocumentStampingConsoleApp.ErrorHandling;
 using PdfDocumentStampingConsoleApp.InputSources;
 using PdfDocumentStampingConsoleApp.InputSources.Console;
 using PdfDocumentStampingConsoleApp.Stamping.Commands.Sources;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._1D;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._1D.Generating;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes.Generating;
 using PdfDocumentStampingConsoleApp.Stamping.Objects.Images;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating;
-using PdfDocumentStampingConsoleApp.Stamping.QRCodes;
 using PdfSharpPdfDocumentStamping;
-using IQRCodeGenerator = PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes.Generating.IQRCodeGenerator;
+using ILinearBarcodeGenerator = PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._1D.Generating.ILinearBarcodeGenerator;
+using IQRCodeGenerator = PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes.Generating.IQRCodeGenerator;
 
 namespace PdfDocumentStampingConsoleApp
 {
@@ -42,22 +45,33 @@ namespace PdfDocumentStampingConsoleApp
 
             public PdfDocumentStampingAppBuilder WithStandardStampers()
             {
-                WithStandardPdfDocumentQRCodeStamper();
+                WithStandardPdfDocumentBarcodeStampers();
                 WithStandardPdfDocumentImageStamper();
+                
+                return this;
+            }
+
+            private PdfDocumentStampingAppBuilder WithStandardPdfDocumentBarcodeStampers()
+            {
+                WithStandardPdfDocumentLinearBarcodeStamper();
+                WithStandardPdfDocumentQRCodeStamper();
 
                 return this;
             }
 
-            public PdfDocumentStampingAppBuilder WithStandardQRCodeGenerator()
+            private PdfDocumentStampingAppBuilder WithStandardPdfDocumentLinearBarcodeStamper()
             {
-                containerBuilder.RegisterType<StandardQRCodeGenerator>().As<IQRCodeGenerator>();
+                WithStandardLinearBarcodeGenerator();
+                WithStandardPdfDocumentStamper();
+
+                containerBuilder.RegisterType<StandardPdfDocumentLinearBarcodeStamper>().As<IPdfDocumentLinearBarcodeStamper>();
 
                 return this;
             }
 
-            public PdfDocumentStampingAppBuilder WithStandardPdfDocumentStamper()
+            private PdfDocumentStampingAppBuilder WithStandardLinearBarcodeGenerator()
             {
-                containerBuilder.RegisterType<PdfSharpPdfDocumentStamper>().As<IPdfDocumentStamper>();
+                containerBuilder.RegisterType<StandardLinearBarcodeGenerator>().As<ILinearBarcodeGenerator>();
 
                 return this;
             }
@@ -72,6 +86,13 @@ namespace PdfDocumentStampingConsoleApp
                 return this;
             }
 
+            public PdfDocumentStampingAppBuilder WithStandardQRCodeGenerator()
+            {
+                containerBuilder.RegisterType<StandardQRCodeGenerator>().As<IQRCodeGenerator>();
+
+                return this;
+            }
+
             public PdfDocumentStampingAppBuilder WithStandardPdfDocumentImageStamper()
             {
                 WithStandardPdfDocumentStamper();
@@ -81,9 +102,9 @@ namespace PdfDocumentStampingConsoleApp
                 return this;
             }
 
-            public PdfDocumentStampingAppBuilder WithStandardStampingCommandInputSource()
+            public PdfDocumentStampingAppBuilder WithStandardPdfDocumentStamper()
             {
-                containerBuilder.RegisterType<StandardStampingCommandInputSource>().As<IStampingCommandInputSource>();
+                containerBuilder.RegisterType<PdfSharpPdfDocumentStamper>().As<IPdfDocumentStamper>();
 
                 return this;
             }
@@ -94,6 +115,13 @@ namespace PdfDocumentStampingConsoleApp
                 WithNoOpStampingCommandOutputSource();
 
                 containerBuilder.RegisterType<StandardStampingCommandSource>().As<IStampingCommandSource>();
+
+                return this;
+            }
+
+            public PdfDocumentStampingAppBuilder WithStandardStampingCommandInputSource()
+            {
+                containerBuilder.RegisterType<StandardStampingCommandInputSource>().As<IStampingCommandInputSource>();
 
                 return this;
             }

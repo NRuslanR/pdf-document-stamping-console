@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PdfDocumentStampingConsoleApp.InputSources;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._1D;
+using PdfDocumentStampingConsoleApp.Stamping.Objects.Barcodes._2D.QRCodes;
 using PdfDocumentStampingConsoleApp.Stamping.Objects.Images;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
 
 namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
 {
@@ -27,8 +29,8 @@ namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
 
         private StampingCommandInput MapStampingCommandInput(PdfDocumentStampingOptions stampingOptions)
         {
-            if (stampingOptions is QRCodeStampingOptions qrCodeStampingOptions)
-                return MapQRCodeStampingCommandInput(qrCodeStampingOptions);
+            if (stampingOptions is BarcodeStampingOptions barcodeStampingOptions)
+                return MapBarcodeStampingCommandInput(barcodeStampingOptions);
 
             if (stampingOptions is ImageStampingOptions imageStampingOptions)
                 return MapImageStampingCommandInput(imageStampingOptions);
@@ -37,19 +39,48 @@ namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
                 $"\"{stampingOptions.GetType().Name}\" is unknown type for the mapping of the command input");
         }
 
+        private StampingCommandInput MapBarcodeStampingCommandInput(BarcodeStampingOptions barcodeStampingOptions)
+        {
+            if (barcodeStampingOptions is LinearBarcodeStampingOptions linearBarcodeStampingOptions)
+                return MapLinearBarcodeStampingCommandInput(linearBarcodeStampingOptions);
+
+            if (barcodeStampingOptions is QRCodeStampingOptions qrCodeStampingOptions) 
+                return MapQRCodeStampingCommandInput(qrCodeStampingOptions);
+
+            throw new ArgumentException($"{barcodeStampingOptions.GetType().Name} is not accounted stamping options type");
+        }
+
+        private BarcodeStampingCommandInput MapLinearBarcodeStampingCommandInput(LinearBarcodeStampingOptions options)
+        {
+            var commandInput = new LinearBarcodeStampingCommandInput
+            {
+                PureBarcode = !options.WriteText
+            };
+
+            SetBarcodeStampingCommandInput(commandInput, options);
+
+            return commandInput;
+        }
+
         private StampingCommandInput MapQRCodeStampingCommandInput(QRCodeStampingOptions qrCodeStampingOptions)
         {
             var commandInput = new QRCodeStampingCommandInput
             {
                 QRCodeDarkColor = qrCodeStampingOptions.QRCodeDarkColor,
                 QRCodeLightColor = qrCodeStampingOptions.QRCodeLightColor,
-                TextToEncode = qrCodeStampingOptions.TextToEncode,
                 DrawQuietZone = qrCodeStampingOptions.DrawQuietZone,
             };
 
-            SetStampingCommandInput(commandInput, qrCodeStampingOptions);
+            SetBarcodeStampingCommandInput(commandInput, qrCodeStampingOptions);
 
             return commandInput;
+        }
+
+        private void SetBarcodeStampingCommandInput(BarcodeStampingCommandInput commandInput, BarcodeStampingOptions options)
+        {
+            commandInput.TextToEncode = options.TextToEncode;
+
+            SetStampingCommandInput(commandInput, options);
         }
 
         private StampingCommandInput MapImageStampingCommandInput(ImageStampingOptions imageStampingOptions)

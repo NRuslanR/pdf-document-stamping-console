@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using PdfDocumentStampingConsoleApp.Stamping.Objects.QRCodes;
 
 namespace PdfDocumentStampingConsoleApp.Stamping.Commands.Sources
 {
