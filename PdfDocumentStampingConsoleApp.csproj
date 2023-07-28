@@ -82,8 +82,14 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="PdfDocumentStamperInterfaces, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PdfDocumentStamperInterfaces.1.1.0\lib\netstandard2.0\PdfDocumentStamperInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="PDFsharp, Version=1.51.5185.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>packages\PDFSharp.NetStandard2.1.51.5185.1\lib\netstandard2.0\PDFsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharpPdfDocumentStamper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PdfSharpPdfDocumentStamper.1.1.0\lib\netstandard2.0\PdfSharpPdfDocumentStamper.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -201,16 +207,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PdfDocumentStamperInterfaces\PdfDocumentStamperInterfaces\PdfDocumentStamperInterfaces.csproj">
-      <Project>{24717433-5c8c-4c06-a35d-c11b70309fd6}</Project>
-      <Name>PdfDocumentStamperInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PdfSharpPdfDocumentStamper\PdfSharpPdfDocumentStamper\PdfSharpPdfDocumentStamper.csproj">
-      <Project>{67f9b54f-90ef-4c08-b406-58c21d1bc239}</Project>
-      <Name>PdfSharpPdfDocumentStamper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
